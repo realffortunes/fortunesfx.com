@@ -91,6 +91,47 @@ if (track) {
   render(FALLBACK); loadTape(); setInterval(loadTape, 5*60*1000);
 }
 
+
+// ---- newsletter popup -------------------------------------------------------------
+// Shows once per visitor ~5s after landing (or at 35% scroll), unless they already
+// subscribed or closed it in the last 7 days. State lives in localStorage.
+(() => {
+  const KEY = 'ffx_popup';
+  let state = {}; try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+  const snoozed = state.until && Date.now() < state.until;
+  if (state.subscribed || snoozed || location.search.includes('nopopup')) return;
+  const save = o => { try { localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {} };
+
+  document.body.insertAdjacentHTML('beforeend', `
+  <div class="pop-backdrop" id="pop-backdrop" hidden>
+    <div class="pop" role="dialog" aria-modal="true" aria-labelledby="pop-title">
+      <button class="pop-close" id="pop-close" aria-label="Close">×</button>
+      <img class="pop-logo" src="assets/logo-gold.png?v=2" alt="">
+      <span class="eyebrow">The newsletter</span>
+      <h2 id="pop-title">Get the notes before the moves.</h2>
+      <p class="lead">Weekly market notes, new tools, and first access to 1-on-1 slots. One email a week.</p>
+      <form class="capture-form" data-capture novalidate>
+        <label class="sr-only" for="pop-email">Email address</label>
+        <input id="pop-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
+        <button class="btn btn-primary" type="submit">Subscribe</button>
+        <p class="capture-note">No spam. Unsubscribe any time.</p>
+      </form>
+      <button class="pop-later" id="pop-later" type="button">Maybe later</button>
+    </div>
+  </div>`);
+  const bd = document.getElementById('pop-backdrop');
+  let shown = false;
+  const open = () => { if (shown || (window.FFXauth && !document.getElementById('auth-backdrop').hidden)) return; shown = true; bd.hidden = false; setTimeout(() => document.getElementById('pop-email').focus(), 60); };
+  const close = () => { bd.hidden = true; save({ until: Date.now() + 7*864e5 }); };
+  document.getElementById('pop-close').addEventListener('click', close);
+  document.getElementById('pop-later').addEventListener('click', close);
+  bd.addEventListener('click', e => { if (e.target === bd) close(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && !bd.hidden) close(); });
+  bd.querySelector('form').addEventListener('submit', () => { save({ subscribed: true }); setTimeout(() => { bd.hidden = true; }, 1200); });
+  setTimeout(open, 5000);
+  addEventListener('scroll', () => { if (scrollY > document.body.scrollHeight * 0.35) open(); }, { passive: true });
+})();
+
 // ---- email capture -------------------------------------------------------------
 // Until data-endpoint/data-field are set (Google Form or newsletter tool), the form
 // opens a pre-filled email so sign-ups still reach Fred.

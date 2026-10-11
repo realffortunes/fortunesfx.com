@@ -345,3 +345,16 @@ p{margin:0}
 .statement-title{font-size:clamp(2.4rem,5.6vw,4.4rem);line-height:1.05;letter-spacing:-.03em;max-width:16ch}
 .btn-xl{padding:1rem 1.7rem;font-size:1.05rem}
 .frame-wrap{padding-top:clamp(1.5rem,4vw,3rem)}
+
+/* newsletter popup */
+.pop-backdrop{position:fixed;inset:0;z-index:90;background:rgba(5,5,6,.65);backdrop-filter:blur(6px);display:grid;place-items:center;padding:20px}
+.pop-backdrop[hidden]{display:none}
+.pop{position:relative;width:min(460px,100%);background:rgba(22,22,25,.85);backdrop-filter:blur(24px) saturate(160%);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:2rem;display:grid;gap:.8rem;box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 40px 100px rgba(0,0,0,.7);animation:popin .45s cubic-bezier(.22,1,.36,1)}
+.pop::before{content:"";position:absolute;left:12%;right:12%;top:-1px;height:1px;background:linear-gradient(90deg,transparent,var(--amber),transparent)}
+.pop-close{position:absolute;top:.8rem;right:.9rem;background:none;border:0;color:var(--muted);font-size:1.6rem;cursor:pointer;line-height:1}
+.pop-logo{height:40px;width:auto;justify-self:start}
+.pop h2{font-size:1.6rem} .pop .lead{font-size:1rem}
+.pop-later{background:none;border:0;color:var(--muted);font:inherit;font-size:.85rem;cursor:pointer;justify-self:center}
+.pop-later:hover{color:var(--text)}
+@keyframes popin{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.pop{animation:none}}
