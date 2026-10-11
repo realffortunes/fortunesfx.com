@@ -38,7 +38,7 @@ p{margin:0}
 .nav-links{display:flex;gap:1.6rem;align-items:center;font-weight:500;color:var(--text-2);font-size:.93rem;flex:1}
 .nav-right{display:flex;align-items:center;gap:1.2rem;margin-left:auto}
 .nav-login{color:var(--text-2);font-weight:500;font-size:.93rem} .nav-login:hover{color:var(--text)}
-.btn-light{background:var(--text);color:#0A0A0B;padding:.6rem 1.15rem;font-size:.9rem} .btn-light:hover{background:#fff}
+.btn-light{background:var(--text);color:var(--bg);padding:.6rem 1.15rem;font-size:.9rem} .btn-light:hover{filter:brightness(1.08)}
 .nav-links a:hover,.nav-links a[aria-current]{color:var(--text)}
 .nav-cta{padding:.65rem 1.2rem;font-size:.9rem}
 
@@ -376,3 +376,39 @@ p{margin:0}
 .footer-capture .btn{padding:.55rem 1rem;font-size:.85rem}
 .footer-news .capture-note{margin-top:.2rem}
 @media (max-width:900px){.footer-capture{max-width:none}}
+
+/* theme toggle */
+.theme-toggle{width:36px;height:36px;border-radius:10px;border:1px solid var(--line-2);background:rgba(255,255,255,.03);color:var(--text-2);display:grid;place-items:center;cursor:pointer;padding:0}
+.theme-toggle:hover{color:var(--text);border-color:var(--amber)}
+.theme-toggle svg{width:18px;height:18px}
+.theme-toggle .ico-sun{display:none} .theme-toggle .ico-moon{display:block}
+:root[data-theme="light"] .theme-toggle .ico-sun{display:block} :root[data-theme="light"] .theme-toggle .ico-moon{display:none}
+.pill-toggle{width:32px;height:32px;border-radius:999px;margin-left:.2rem}
+
+/* light theme */
+:root[data-theme="light"]{
+  --bg:#FAF6EE; --bg-2:#F3EDDF; --panel:#FFFFFF; --panel-2:#F7F2E8;
+  --line:rgba(0,0,0,.08); --line-2:rgba(0,0,0,.14);
+  --text:#151515; --text-2:#3B3B3B; --muted:#6B6558;
+}
+:root[data-theme="light"] .tape .tick b{color:var(--text)}
+:root[data-theme="light"] .tape::before{background:linear-gradient(90deg,var(--bg-2),transparent)} :root[data-theme="light"] .tape::after{background:linear-gradient(270deg,var(--bg-2),transparent)}
+:root[data-theme="light"] .float-nav{background:rgba(255,255,255,.65);border-color:rgba(0,0,0,.1);box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 20px 50px rgba(21,21,21,.15)}
+:root[data-theme="light"] .float-nav::before{background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,255,255,0) 55%)}
+:root[data-theme="light"] .frame{box-shadow:0 30px 80px rgba(21,21,21,.15),inset 0 1px 0 rgba(255,255,255,.8)}
+:root[data-theme="light"] .frame-body{background:radial-gradient(60% 80% at 50% 100%,rgba(217,165,32,.18),transparent 70%)}
+:root[data-theme="light"] .panel{background:#151515;color:#F3EFE6} :root[data-theme="light"] .panel .row{border-color:rgba(255,255,255,.08)} :root[data-theme="light"] .panel .muted{color:#9A958B}
+:root[data-theme="light"] .cta .box{background:linear-gradient(135deg,#1A1A1D,#0E0E10);color:#F3EFE6;border-color:rgba(255,255,255,.12)} :root[data-theme="light"] .cta h2{color:#F3EFE6} :root[data-theme="light"] .cta p{color:#CFC9BC}
+:root[data-theme="light"] .auth-modal,:root[data-theme="light"] .pop,:root[data-theme="light"] .gate-card{background:rgba(255,255,255,.85);border-color:rgba(0,0,0,.1);box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 40px 100px rgba(21,21,21,.25)}
+:root[data-theme="light"] .auth-backdrop,:root[data-theme="light"] .pop-backdrop{background:rgba(250,246,238,.6)}
+:root[data-theme="light"] .capture-inline{box-shadow:0 20px 50px rgba(21,21,21,.12)}
+:root[data-theme="light"] .hero-glow{background:radial-gradient(60% 50% at 50% 0%,rgba(217,165,32,.28),transparent 70%)}
+:root[data-theme="light"] .hero-glow::after{opacity:.4}
+:root[data-theme="light"] .gated .gate-content{filter:blur(10px) saturate(.6);opacity:.5}
+:root[data-theme="light"] .theme-toggle{background:rgba(0,0,0,.03)}
+:root[data-theme="light"] .card-visual{background:var(--bg-2)}
+:root[data-theme="light"] .footer-socials a{background:rgba(0,0,0,.03)}
+:root[data-theme="light"] .btn-ghost{background:rgba(0,0,0,.03)} :root[data-theme="light"] .btn-ghost:hover{background:rgba(0,0,0,.07)}
+:root[data-theme="light"] .pill{background:rgba(0,0,0,.04)} :root[data-theme="light"] .chips a{background:rgba(0,0,0,.02)}
+:root[data-theme="light"] .about-photo{box-shadow:0 30px 80px rgba(21,21,21,.2)}
+:root[data-theme="light"] .about-photo figcaption{background:linear-gradient(180deg,transparent,rgba(10,10,11,.85))} :root[data-theme="light"] .about-photo figcaption b{color:#F3EFE6} :root[data-theme="light"] .about-photo figcaption span{color:#CFC9BC}

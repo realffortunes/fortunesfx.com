@@ -2,6 +2,14 @@
    Sections: nav, ticker tape, email capture, apply form, socials, motion.
    Each block checks for its elements, so every page can load the same file. */
 
+// ---- theme (light / dark) ------------------------------------------------------
+(() => {
+  const root = document.documentElement;
+  const get = () => root.getAttribute('data-theme') || 'dark';
+  const set = t => { root.setAttribute('data-theme', t); try { localStorage.setItem('ffx_theme', t); } catch (e) {} };
+  document.querySelectorAll('[data-theme-toggle]').forEach(b => b.addEventListener('click', () => set(get() === 'dark' ? 'light' : 'dark')));
+})();
+
 // ---- nav -------------------------------------------------------------------
 document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());
 const navToggle = document.querySelector('.nav-toggle'), navLinks = document.getElementById('nav-links');
