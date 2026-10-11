@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=35">
+<link rel="stylesheet" href="styles.css?v=36">
 </head>
 <body>
 <div class="tape" aria-label="Market ticker"><div class="tape-track" id="tape-track"></div></div>
@@ -46,14 +46,17 @@
       <span class="eyebrow">Library</span>
       <h1 data-split>Tools built <em>in-house.</em></h1>
       <p class="lead">Indicators and expert advisors developed in-house for TradingView and MetaTrader. Every tool here exists because Fred needed it first.</p>
-      <div class="chips lib-filters" aria-label="Filter">
-        <a href="#" data-filter="all" class="on">All</a><a href="#" data-filter="indicator">Indicators</a><a href="#" data-filter="ea">Expert Advisors</a>
-      </div>
+      <div class="hero-actions"><a class="btn btn-primary" href="#gate">Get notified</a></div>
     </div>
   </section>
+  <div class="gated" aria-live="polite">
+    <div class="gate-content" aria-hidden="true">
 
   <section class="section">
     <div class="wrap">
+      <div class="chips lib-filters" aria-label="Filter">
+        <a href="#" data-filter="all" class="on">All</a><a href="#" data-filter="indicator">Indicators</a><a href="#" data-filter="ea">Expert Advisors</a>
+      </div>
       <div class="cards" id="library-grid">
         <article class="card lib" data-type="indicator">
           <div class="card-visual"><svg viewBox="0 0 120 72" aria-hidden="true"><path d="M8 54 C30 50, 40 20, 60 28 S90 60, 112 18" fill="none" stroke="var(--gold)" stroke-width="3"/><path d="M8 40 C30 44, 40 56, 60 46 S90 20, 112 44" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4" opacity=".6"/></svg></div>
@@ -102,6 +105,20 @@
     document.getElementById('lib-more').addEventListener('click', () => { shown += PAGE; render(); });
     render();
   </script>
+
+    </div>
+    <div class="gate-card" id="gate">
+      <span class="eyebrow">Coming soon</span>
+      <h2>The Library opens soon.</h2>
+      <p class="lead">Indicators and tools are being moved over. Leave your email and you'll get the first drop.</p>
+      <form class="capture-form" data-capture novalidate>
+        <label class="sr-only" for="gate-email-library">Email address</label>
+        <input id="gate-email-library" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
+        <button class="btn btn-primary" type="submit">Notify me</button>
+        <p class="capture-note">One email when it goes live. No spam.</p>
+      </form>
+    </div>
+  </div>
 </main>
 <footer class="footer">
   <div class="wrap footer-grid">
