@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Library | FortunesFX Firm</title>
+<meta name="description" content="Indicators, expert advisors, and tools built in-house at FortunesFX Firm.">
+<meta property="og:title" content="Library | FortunesFX Firm">
+<meta property="og:description" content="Indicators, expert advisors, and tools built in-house at FortunesFX Firm.">
+<meta property="og:image" content="https://fortunesfx.com/assets/logo-gold.png?v=2">
+<meta property="og:url" content="https://fortunesfx.com/library.html">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="icon" type="image/png" href="assets/logo-gold.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=33">
+</head>
+<body>
+<div class="tape" aria-label="Market ticker"><div class="tape-track" id="tape-track"></div></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="FortunesFX Firm home"><img src="assets/logo-gold.png?v=2" alt="FFortunes Trading"></a>
+    <nav class="nav-links" id="nav-links">
+      <a href="about.html">About</a>
+      <a href="work-with-me.html">Services</a>
+      <a href="library.html">Library</a>
+      <a href="work-with-me.html#gate">Prices</a>
+    </nav>
+    <div class="nav-right" data-auth-area></div>
+  </div>
+</header>
+<nav class="float-nav" id="float-nav" aria-label="Quick navigation">
+  <a class="float-brand" href="index.html" aria-label="Home"><img src="assets/logo-gold.png?v=2" alt=""></a>
+  <a href="about.html">About</a>
+  <a href="work-with-me.html">Services</a>
+  <a href="library.html">Library</a>
+  <a href="work-with-me.html#gate">Prices</a>
+  <span class="pill-auth" data-auth-pill></span>
+</nav>
+
+<main>
+  <section class="hero hero-page">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap">
+      <span class="eyebrow">Library</span>
+      <h1 data-split>Tools built <em>in-house.</em></h1>
+      <p class="lead">Indicators and expert advisors developed in-house for TradingView and MetaTrader. Every tool here exists because Fred needed it first.</p>
+      <div class="chips lib-filters" aria-label="Filter">
+        <a href="#" data-filter="all" class="on">All</a><a href="#" data-filter="indicator">Indicators</a><a href="#" data-filter="ea">Expert Advisors</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cards" id="library-grid">
+        <article class="card lib" data-type="indicator">
+          <div class="card-visual"><svg viewBox="0 0 120 72" aria-hidden="true"><path d="M8 54 C30 50, 40 20, 60 28 S90 60, 112 18" fill="none" stroke="var(--gold)" stroke-width="3"/><path d="M8 40 C30 44, 40 56, 60 46 S90 20, 112 44" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4" opacity=".6"/></svg></div>
+          <div class="lib-meta"><span class="tag-soft">Indicator</span><span class="tag-soft">TradingView</span></div>
+          <h3>[Tool name]</h3>
+          <p>[One line on what it does and when to use it.]</p>
+          <div class="lib-row"><span class="price-tag">$—</span><a class="btn btn-ghost" href="#" data-auth="signup">Get access</a></div>
+        </article>
+        <article class="card lib locked" data-type="ea">
+          <div class="card-visual"><svg viewBox="0 0 120 72" aria-hidden="true"><rect x="14" y="14" width="92" height="44" rx="8" fill="none" stroke="currentColor" stroke-width="2" opacity=".5"/><path d="M26 44 L42 30 L56 40 L74 22 L94 34" fill="none" stroke="var(--up)" stroke-width="3"/><circle cx="94" cy="34" r="4" fill="var(--amber)"/></svg>
+            <div class="lock"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span>Coming soon</span></div>
+          </div>
+          <div class="lib-meta"><span class="tag-soft">Expert Advisor</span><span class="tag-soft">MT5</span><span class="tag-soft premium">Premium</span></div>
+          <h3>Expert Advisors</h3>
+          <p>Automated execution built on the FortunesFX playbook. In testing now. Members hear first when the first one ships.</p>
+          <div class="lib-row"><span class="price-tag">Locked</span><a class="btn btn-ghost" href="index.html#list">Notify me</a></div>
+        </article>
+      </div>
+      <div class="lib-more">
+        <span class="lib-count" id="lib-count">0 OF 0 SHOWN</span>
+        <button class="btn btn-ghost lib-more-btn" id="lib-more" type="button"><span aria-hidden="true">↓</span> Show more indicators</button>
+      </div>
+      <p class="muted" style="margin-top:1.6rem;text-align:center">New tools drop to the newsletter first. <a href="index.html#list" style="color:var(--amber)">Subscribe →</a></p>
+    </div>
+  </section>
+  <script>
+    // Library paging: show PAGE cards at a time within the active filter.
+    const PAGE = 24;
+    let filter = 'all', shown = PAGE;
+    const cards = () => [...document.querySelectorAll('.card.lib')].filter(c => filter === 'all' || c.dataset.type === filter);
+    const label = { all: 'tools', indicator: 'indicators', ea: 'expert advisors' };
+    function render() {
+      document.querySelectorAll('.card.lib').forEach(c => c.style.display = 'none');
+      const list = cards(); list.slice(0, shown).forEach(c => c.style.display = '');
+      const n = Math.min(shown, list.length);
+      document.getElementById('lib-count').textContent = `${n} OF ${list.length} SHOWN`;
+      const btn = document.getElementById('lib-more');
+      btn.hidden = n >= list.length;
+      btn.innerHTML = `<span aria-hidden="true">↓</span> Show more ${label[filter]}`;
+    }
+    document.querySelectorAll('.lib-filters a').forEach(a => a.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelectorAll('.lib-filters a').forEach(x => x.classList.remove('on')); a.classList.add('on');
+      filter = a.dataset.filter; shown = PAGE; render();
+    }));
+    document.getElementById('lib-more').addEventListener('click', () => { shown += PAGE; render(); });
+    render();
+  </script>
+</main>
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand"><a href="index.html"><img src="assets/logo-gold.png?v=2" alt="FFortunes Trading"></a><div class="footer-socials" id="footer-socials"></div></div>
+    <nav class="footer-col" aria-label="Navigation">
+      <h4>Navigation</h4>
+      <a href="about.html">About</a>
+      <a href="work-with-me.html">Services</a>
+      <a href="library.html">Library</a>
+      <a href="work-with-me.html#gate">Prices</a>
+    </nav>
+    <div class="footer-col" aria-label="Contact">
+      <h4>Contact</h4>
+      <a href="mailto:info@fortunesfx.com"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>info@fortunesfx.com</a>
+      <a href="tel:+12405077976"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>(240) 507-7976</a>
+    </div>
+    <div class="footer-col" aria-label="Newsletter">
+      <h4>Newsletter</h4>
+      <a class="btn btn-primary footer-sub" href="index.html#list">Subscribe</a>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© <span id="year"></span> FortunesFX Firm, LLC. All rights reserved.</span>
+    <a href="legal.html#risk">Risk Disclosure</a>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/motion@11.11.17/dist/motion.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="config.js?v=1"></script>
+<script src="site.js?v=26"></script>
+<script src="auth.js?v=3"></script>
+</body>
+</html>

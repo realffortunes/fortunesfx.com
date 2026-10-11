@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Account | FortunesFX Firm</title>
+<meta name="description" content="Your FortunesFX account.">
+<meta property="og:title" content="Account | FortunesFX Firm">
+<meta property="og:description" content="Your FortunesFX account.">
+<meta property="og:image" content="https://fortunesfx.com/assets/logo-gold.png?v=2">
+<meta property="og:url" content="https://fortunesfx.com/account.html">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="icon" type="image/png" href="assets/logo-gold.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=33">
+</head>
+<body>
+<div class="tape" aria-label="Market ticker"><div class="tape-track" id="tape-track"></div></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="FortunesFX Firm home"><img src="assets/logo-gold.png?v=2" alt="FFortunes Trading"></a>
+    <nav class="nav-links" id="nav-links">
+      <a href="about.html">About</a>
+      <a href="work-with-me.html">Services</a>
+      <a href="library.html">Library</a>
+      <a href="work-with-me.html#gate" aria-current="page">Prices</a>
+    </nav>
+    <div class="nav-right" data-auth-area></div>
+  </div>
+</header>
+<nav class="float-nav" id="float-nav" aria-label="Quick navigation">
+  <a class="float-brand" href="index.html" aria-label="Home"><img src="assets/logo-gold.png?v=2" alt=""></a>
+  <a href="about.html">About</a>
+  <a href="work-with-me.html">Services</a>
+  <a href="library.html">Library</a>
+  <a href="work-with-me.html#gate">Prices</a>
+  <span class="pill-auth" data-auth-pill></span>
+</nav>
+
+<main>
+  <section class="hero hero-page">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap">
+      <span class="eyebrow">Account</span>
+      <h1 id="acct-title">Your <em>account.</em></h1>
+      <p class="lead" id="acct-sub">Log in to see your sessions, tools, and newsletter settings.</p>
+      <div class="hero-actions" id="acct-actions"><a class="btn btn-primary" href="#" data-auth="login">Log in</a><a class="btn btn-ghost" href="#" data-auth="signup">Create an account</a></div>
+    </div>
+  </section>
+  <section class="section" id="acct-body" hidden>
+    <div class="wrap">
+      <div class="cards">
+        <article class="card"><h3>Profile</h3><p id="acct-email"></p><a href="#" id="acct-signout">Sign out →</a></article>
+        <article class="card"><h3>Sessions</h3><p>Your 1-on-1 bookings will show here once booking goes live.</p><a href="work-with-me.html">Work with Me →</a></article>
+        <article class="card"><h3>Tools &amp; purchases</h3><p>Indicators, products, and downloads you own will appear here.</p><a href="index.html#explore">Explore →</a></article>
+      </div>
+    </div>
+  </section>
+  <script>
+    addEventListener('load', async () => {
+      const A = window.FFXauth; if (!A || !A.ready) return;
+      const { data } = await A.client.auth.getSession(); const u = data.session?.user;
+      if (!u) return;
+      document.getElementById('acct-title').innerHTML = 'Welcome back, <em>' + (u.user_metadata?.name || u.email.split('@')[0]) + '.</em>';
+      document.getElementById('acct-sub').textContent = 'Signed in as ' + u.email;
+      document.getElementById('acct-actions').hidden = true; document.getElementById('acct-body').hidden = false;
+      document.getElementById('acct-email').textContent = u.email;
+      document.getElementById('acct-signout').addEventListener('click', async e => { e.preventDefault(); await A.client.auth.signOut(); location.href = 'index.html'; });
+    });
+  </script>
+</main>
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand"><a href="index.html"><img src="assets/logo-gold.png?v=2" alt="FFortunes Trading"></a><div class="footer-socials" id="footer-socials"></div></div>
+    <nav class="footer-col" aria-label="Navigation">
+      <h4>Navigation</h4>
+      <a href="about.html">About</a>
+      <a href="work-with-me.html">Services</a>
+      <a href="library.html">Library</a>
+      <a href="work-with-me.html#gate">Prices</a>
+    </nav>
+    <div class="footer-col" aria-label="Contact">
+      <h4>Contact</h4>
+      <a href="mailto:info@fortunesfx.com"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>info@fortunesfx.com</a>
+      <a href="tel:+12405077976"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>(240) 507-7976</a>
+    </div>
+    <div class="footer-col" aria-label="Newsletter">
+      <h4>Newsletter</h4>
+      <a class="btn btn-primary footer-sub" href="index.html#list">Subscribe</a>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© <span id="year"></span> FortunesFX Firm, LLC. All rights reserved.</span>
+    <a href="legal.html#risk">Risk Disclosure</a>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/motion@11.11.17/dist/motion.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="config.js?v=1"></script>
+<script src="site.js?v=26"></script>
+<script src="auth.js?v=3"></script>
+</body>
+</html>
